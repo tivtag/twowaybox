@@ -1,0 +1,5 @@
+ToDo:
+* Bug: Rotate block when block faces wall/own spawn location
+* Feature: Increment game speed of the the opposite player on line clears 
+* Feature: More Game Modes
+* Feature: Continue paused game

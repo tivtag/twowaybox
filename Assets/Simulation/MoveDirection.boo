@@ -1,0 +1,4 @@
+
+enum MoveDirection:
+	Left
+	Right
