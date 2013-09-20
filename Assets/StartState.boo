@@ -39,16 +39,16 @@ class StartState (IGameState):
 			HandleNonMenuStateGUI()
 
 	private def HandleMenuStateGUI():
-		if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 - 140, 150, 30), GUIContent("Start 1P black", "Play black alone!")):
+		if MenuButton("Start 1P black", "Play black alone!", -140):
 			StartGame[of SinglePlayerGameMode]({mode|mode.PlayerColor = GameColor.Black})
 		
-		if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 - 100, 150, 30), GUIContent("Start 1P white", "Play white alone!")):
+		if MenuButton("Start 1P white", "Play white alone!", -107):
 			StartGame[of SinglePlayerGameMode]({mode|mode.PlayerColor = GameColor.White})
-			
-		if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 - 60, 150, 30), GUIContent("Start 2P game", "Two Players - most clears after 4 matches wins!")):
+		
+		if MenuButton("Start 2P game", "Two Players - most clears after 4 matches wins!", -50):
 			StartGame[of FourMatchGameMode](null)
-				
-		if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 + 10, 150, 30), "Exit"):
+		
+		if MenuButton("Exit", "", 7):
 			ExitGame()
 		
 		GUI.Label(Rect((Screen.width/2) - 120, Screen.height/2 + 50, 240, 40), GUI.tooltip)
@@ -61,6 +61,9 @@ class StartState (IGameState):
 		
 		if game.Victory != GameVictory.None:
 			scoresView.DrawGUI()
+
+	private def MenuButton(buttonText as string, buttonTooltip as string, offsetY as int):
+		return GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 + offsetY, 150, 30), GUIContent(buttonText, buttonTooltip))
 
 	private def HandleNonMenuStateGUI():
 		e = Event.current;
