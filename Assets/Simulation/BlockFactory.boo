@@ -2,6 +2,7 @@ import System.Collections.Generic
 import UnityEngine
 
 # Builds Blocks based on BlockTemplates
+# The TGM Rotation System is used: http://harddrop.com/wiki/TGM_Rotation
 class BlockFactory:
 	# Raised when one of the players spawns a new block
 	event BlockSpawned as EventHandler[of BlockEventArgs]

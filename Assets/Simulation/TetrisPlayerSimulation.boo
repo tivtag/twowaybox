@@ -40,19 +40,36 @@ class TetrisPlayerSimulation:
 			player.Movement.NotifyBlockSpawned()
 			blockHadInitialCollisionTest = false
 
-	# Rotate block
+	# Rotate block (see http://harddrop.com/wiki/TGM_Rotation)
 	private def RotateBlock(inputState as PlayerInputState):
 		rotateDirection = inputState.RotateDirection
 		if rotateDirection == 0 or not player.Movement.RotationAllowed:
 			return
 		
 		block.Rotate(rotateDirection)
-		if field.TestCollision(block, Point2()):
-			block.Rotate(-rotateDirection) # undo rotation since it didn't work	
+		
+		rotateAllowed as bool = false
+		offset as Point2 
+		
+		# Default Check
+		if not field.TestCollision(block, offset=Point2(0, 0)):
+			rotateAllowed = true
+		# Right kick
+		elif not field.TestCollision(block, offset=Point2(1,0)):
+			rotateAllowed = true
+		# Left kick
+		elif not field.TestCollision(block, offset=Point2(-1,0)):
+			rotateAllowed = true
+		
+		if rotateAllowed:
+			block.MoveBy(offset)
+		else:
+			# rollback rotation since it didn't work
+			block.Rotate(-rotateDirection) 
 		
 		player.Movement.ResetRotationTimer()
 
-    # Move block left/right
+	# Move block left/right
 	private def MoveBlockHorizontal(inputState as PlayerInputState):
 		movement = inputState.HorizontalMovement
 		if movement == 0 or not player.Movement.HorizontalAllowed:
