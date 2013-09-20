@@ -28,14 +28,17 @@ class GameField:
 
 	def TestCollision(block as Block, offset as Point2):
 		for cell in block.Cells:
-			state = TestCollision(cell, offset)
+			state = TestCollision(cell, offset, block.Color)
 			if state != CollisionState.None:
 				return state
 		
 		return CollisionState.None
 
-	def TestCollision(cell as Cell, offset as Point2):
+	private def TestCollision(cell as Cell, offset as Point2, blockColor as GameColor):
 		position = cell.Position + offset
+		
+		if IsValidHiddenRowIndex(position, blockColor):
+			return CollisionState.None
 		
 		if IsValidIndex(position):
 			fieldCellColor = GetCellUnsafe(position)
@@ -62,7 +65,7 @@ class GameField:
 	def ClearCompletedLinesInRange(startRow as int, endRow as int, player as Player):
 		lines = FindCompletedLinesInRange(startRow, endRow, player.Color)
 		
-		if player.Color == GameColor.Black:		
+		if player.Color == GameColor.Black:	
 			# The lines are sorted from top to bottom
 			for line as int in lines:
 				# Move lines above down
@@ -105,6 +108,14 @@ class GameField:
 
 	def IsValidIndex(position as Point2):
 		return position.x >= 0 and position.y >= 0 and position.x < size.x and position.y < size.y
+
+	def IsValidHiddenRowIndex(position as Point2, color as GameColor):
+		if color == GameColor.Black and position.y == -1:
+			return true
+		elif color == GameColor.White and position.y == SimulationConstants.WorldSize.y:
+			return true
+		else:
+			return false
 
 	def IsFillerIndex(position as Point2):
 		return IsValidIndex(position) and (position.x < SimulationConstants.HalfFillerSize.x or position.x >= (SimulationConstants.MatrixSize.x-SimulationConstants.HalfFillerSize.x))
