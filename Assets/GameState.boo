@@ -36,7 +36,7 @@ class GameState (IGameState):
 			ChangeToStartState()
 
 	private def OnGameVictoryChanged():
-		if game.Victory != GameColor.None:
+		if game.Victory != GameVictory.None:
 			ChangeToStartState()
 
 	def OnEnter():

@@ -20,7 +20,11 @@ class PlayerMovement:
 		UpdateHorizontal(inputState, oldInputState)
 		UpdateRotation(inputState, oldInputState)
 
-	private def UpdateVertical(inputState as PlayerInputState, oldInputState as PlayerInputState):		
+	# Modifies 'game speed' by adjusting the time between automatic vertial movement of the active block
+	def IncreaseVerticalMovementSpeedByFactor(factor as single):
+		verticalSingleStepMovementTime -= (verticalSingleStepMovementTime * factor)
+
+	private def UpdateVertical(inputState as PlayerInputState, oldInputState as PlayerInputState):
 		verticalTimer -= Time.deltaTime
 		if verticalDropTimer > 0.0f:
 			verticalDropTimer -= Time.deltaTime
@@ -46,19 +50,21 @@ class PlayerMovement:
 
 	def Reset():
 		verticalDropTimer = 0.0
+		verticalSingleStepMovementTime = SimulationConstants.VerticalSingleStepMovementTime
+		
 		ResetVerticalTimer()
 		ResetHorizontalTimer()
 		ResetRotationTimer()
 
 	def ResetVerticalTimer():
-		verticalTimer = SimulationConstants.VerticalSingleStepMovementTime
+		verticalTimer = verticalSingleStepMovementTime
 
 	def NotifyBlockSpawned():
 		verticalDropTimer = SimulationConstants.VerticalDropTimer
 		ResetVerticalTimer()
 
 	def ResetHorizontalTimer():
-		if horizontalSlidingActive:		
+		if horizontalSlidingActive:
 			horizontalTimer = SimulationConstants.HorizontalSlideMovementTime
 		else:
 			horizontalTimer = SimulationConstants.HorizontalSingleStepMovementTime
@@ -77,4 +83,5 @@ class PlayerMovement:
 	# Up/Down-Movement. Blocks can only go into one verticalDirection per player
 	private verticalDropTimer as single
 	private verticalTimer as single
+	private verticalSingleStepMovementTime as single = SimulationConstants.VerticalSingleStepMovementTime
 	private final verticalDirection as int

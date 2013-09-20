@@ -5,22 +5,23 @@ class ScoresView:
 		self.game = game
 
 	def DrawGUI():
+		DrawScore(game.PlayerBlack, 0)
+		DrawScore(game.PlayerWhite, Screen.height - 35)
+
+	private def DrawScore(player as Player, offsetY as int):
+		if not player.Active:
+			return
+		
 		style = GUI.skin.GetStyle("Box")
 		style.alignment = TextAnchor.MiddleCenter
 		
-		# Black
-		score = game.PlayerBlack.Score
+		score = player.Score.Value
 		style.fontSize = GetFontSize(score)
-		GUI.Box(Rect(Screen.width-110, 5, 100, 25), score.ToString(), style)
-		if game.ClearCountBlack > 0:
-			GUI.Box(Rect(Screen.width-85, 35, 50, 25), System.String(char('|'), game.ClearCountBlack), style)
+		GUI.Box(Rect(Screen.width-110, offsetY + 5, 100, 25), score.ToString(), style)
 		
-		# White
-		score = game.PlayerWhite.Score
-		style.fontSize = GetFontSize(score)
-		GUI.Box(Rect(Screen.width-110, Screen.height - 30, 100, 25), score.ToString(), style)
-		if game.ClearCountWhite > 0:
-			GUI.Box(Rect(Screen.width-85, Screen.height - 60, 50, 25), System.String(char('|'), game.ClearCountWhite), style)
+		clearCount = game.GetClearCount(player.Color)
+		if clearCount > 0:
+			GUI.Box(Rect(Screen.width-85, offsetY + 35, 50, 25), System.String(char('|'), clearCount), style)
 
 	private def GetFontSize(score as int):
 		if score < 1000:

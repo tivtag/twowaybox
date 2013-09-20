@@ -15,12 +15,14 @@ class GameVictoryView:
 	private def OnGameVictoryChanged():
 		for text in texts:
 			match game.Victory:
-				case GameColor.White:
+				case GameVictory.White:
 					text.Show("! white !", Color.white)
-				case GameColor.Black:
+				case GameVictory.Black:
 					text.Show("! black !", Color.black)
-				case GameColor.Both:
+				case GameVictory.Both:
 					text.Show("~ draw ~", Color.gray)
+				case GameVictory.Neither:
+					text.Show("- lost -", Color.gray)
 				otherwise:
 					text.Hide()
 

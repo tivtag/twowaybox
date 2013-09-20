@@ -40,7 +40,7 @@ class Game:
 	BlockFactory as BlockFactory:
 		get: return blockFactory
 
-	Victory as GameColor:
+	Victory as GameVictory:
 		get: return victory
 		set:
 			if value != victory:
@@ -82,7 +82,7 @@ class Game:
 		pauseCounter -= 1
 
 	def Reset():
-		Victory = GameColor.None
+		Victory = GameVictory.None
 		playerBlack.Reset()
 		playerWhite.Reset()
 		
@@ -114,7 +114,7 @@ class Game:
 		if ClearCountChanged != null:
 			ClearCountChanged(self, EventArgs.Empty)
 
-	private def GetClearCount(color as GameColor):
+	def GetClearCount(color as GameColor):
 		count = 0
 		for tetris in tetrises:
 			if tetris.Victory == color:
@@ -132,6 +132,14 @@ class Game:
 			return GameSide.None
 		
 		return uncleared[UnityEngine.Random.Range(0, uncleared.Count-1)]
+	
+	def GetPlayer(color as GameColor):
+		if color == GameColor.White:
+			return playerWhite
+		elif color == GameColor.Black:
+			return playerBlack
+		else:
+			return null
 
 	# Gets the neighbour side of the active side in the given direction
 	def GetNeighbourSide(direction as MoveDirection):
@@ -144,7 +152,7 @@ class Game:
 
 	private clearCountWhite as int
 	private clearCountBlack as int
-	private victory as GameColor
+	private victory as GameVictory
 
 	private final playerBlack as Player = Player(GameColor.Black)
 	private final playerWhite as Player = Player(GameColor.White)

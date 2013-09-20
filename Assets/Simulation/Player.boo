@@ -5,7 +5,7 @@ class Player:
 	Color as GameColor:
 		get: return color
 
-	Score as long:
+	Score as PlayerScore:
 		get: return score
 
 	Blocks as PlayerBlocks:
@@ -14,30 +14,27 @@ class Player:
 	Movement as PlayerMovement:
 		get: return movement
 
+	Active as bool:
+		get: return active
+		set: active = value
+
 	def constructor(color as GameColor):
 		self.color = color
 		self.blocks = PlayerBlocks(self)
 		self.movement = PlayerMovement(color)
 
 	def Reset():
-		score = 0
+		active = true
+		score.Reset()
 		blocks.Reset()
 		movement.Reset()
-
-	def IncreaseScoreForLineClear(lineClearCount as int):
-		score += 10 * lineClearCount * lineClearCount * lineClearCount
-
-	def IncreaseScoreForBlockDrop():
-		score += 1
-
-	def IncreaseScoreForSideClear():
-		score += 1000
 
 	def Update(inputState as PlayerInputState, oldInputState as PlayerInputState):
 		movement.Update(inputState, oldInputState)
 
-	private score as long
+	private active as bool = true
 
+	private final score as PlayerScore = PlayerScore()
 	private final movement as PlayerMovement
 	private final blocks as PlayerBlocks
 	private final color as GameColor

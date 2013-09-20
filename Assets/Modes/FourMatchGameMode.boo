@@ -32,11 +32,11 @@ class FourMatchGameMode (IGameMode):
 		totalClearCount = game.ClearCountWhite + game.ClearCountBlack
 		if totalClearCount == 4:
 			if game.ClearCountWhite > game.ClearCountBlack:
-				game.Victory = GameColor.White
+				game.Victory = GameVictory.White
 			elif game.ClearCountWhite < game.ClearCountBlack:
-				game.Victory = GameColor.Black
+				game.Victory = GameVictory.Black
 			else: 
-				game.Victory = GameColor.Both
+				game.Victory = GameVictory.Both
 		elif totalClearCount > 0:
 			changeSideAfterClearInSeconds = 3.0
 

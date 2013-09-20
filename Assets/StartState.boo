@@ -39,24 +39,27 @@ class StartState (IGameState):
 			HandleNonMenuStateGUI()
 
 	private def HandleMenuStateGUI():
-		if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 - 60, 150, 30), GUIContent("Start 4-matches game", "Most clears after 4 matches wins!")):
-			ChangeToGameState[of FourMatchGameMode]()
+		if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 - 140, 150, 30), GUIContent("Start 1P black", "Play black alone!")):
+			StartGame[of SinglePlayerGameMode]({mode|mode.PlayerColor = GameColor.Black})
 		
-		# if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 - 25, 150, 30), GUIContent("Start 3-clear game", "First to clear 3 sides wins!")):
-		#	ChangeToGameState[of ThreeClearGameMode]()
-		
+		if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 - 100, 150, 30), GUIContent("Start 1P white", "Play white alone!")):
+			StartGame[of SinglePlayerGameMode]({mode|mode.PlayerColor = GameColor.White})
+			
+		if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 - 60, 150, 30), GUIContent("Start 2P game", "Two Players - most clears after 4 matches wins!")):
+			StartGame[of FourMatchGameMode](null)
+				
 		if GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 + 10, 150, 30), "Exit"):
 			ExitGame()
 		
 		GUI.Label(Rect((Screen.width/2) - 120, Screen.height/2 + 50, 240, 40), GUI.tooltip)
-		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | v0.2")
+		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | v0.3")
 		
 		e = Event.current;
 		if e.type == EventType.KeyDown:
 			if e.keyCode == KeyCode.Escape:
 				stateMenuOpen = false
 		
-		if game.Victory != GameColor.None:
+		if game.Victory != GameVictory.None:
 			scoresView.DrawGUI()
 
 	private def HandleNonMenuStateGUI():
@@ -78,9 +81,12 @@ class StartState (IGameState):
 		light.color = Color.white
 		light.intensity = 5.05
 
-	private def ChangeToGameState[of TGameMode(IGameMode)]():
+	private def StartGame[of TGameMode(IGameMode)](initializer as System.Action[of TGameMode]):
 		states.ChangeTo[of GameState]()
-		gameModes.ChangeTo[of TGameMode]()
+		mode = gameModes.Get[of TGameMode]()
+		if not initializer is null:
+			initializer(mode)
+		gameModes.Set(mode)
 
 	private angle as single = 90.0
 	private upVector as Vector3 = Vector3.down

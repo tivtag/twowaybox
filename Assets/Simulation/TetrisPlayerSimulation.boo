@@ -15,7 +15,7 @@ class TetrisPlayerSimulation:
 
 	# Updates the simulation for the given player
 	def Update():
-		if gameLost:
+		if gameLost or (not player.Active):
 			return
 		
 		inputState = PlayerInputState.FromInput(player.Color)
@@ -96,7 +96,7 @@ class TetrisPlayerSimulation:
 
 	# Notifies the player simulation the other player has lost
 	def WinGame():
-		player.IncreaseScoreForSideClear()
+		player.Score.IncreaseForSideClear()
 
 	private def LoseGame():
 		gameLost = true
@@ -105,9 +105,9 @@ class TetrisPlayerSimulation:
 		verticalBlockRange = block.VerticalRange
 		lineClearCount = field.ClearCompletedLinesInRange(verticalBlockRange.x, verticalBlockRange.y, player)
 		if lineClearCount > 0:
-			player.IncreaseScoreForLineClear(lineClearCount)
+			player.Score.IncreaseForLineClear(lineClearCount)
 		else:
-			player.IncreaseScoreForBlockDrop()
+			player.Score.IncreaseForBlockDrop()
 
 	private gameLost as bool
 
