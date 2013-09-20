@@ -72,6 +72,7 @@
      <Compile Include="Assets\Simulation\GameSide.boo" />
      <Compile Include="Assets\Simulation\GameSideChangeMessage.boo" />
      <Compile Include="Assets\Simulation\GameSideExtensions.boo" />
+     <Compile Include="Assets\Simulation\GameVictory.boo" />
      <Compile Include="Assets\Simulation\MoveDirection.boo" />
      <Compile Include="Assets\Simulation\MoveEventArgs.boo" />
      <Compile Include="Assets\Simulation\Player.boo" />
