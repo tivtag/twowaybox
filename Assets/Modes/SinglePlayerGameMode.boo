@@ -37,7 +37,7 @@ class SinglePlayerGameMode (IGameMode):
 			game.Victory = GameVictory.Neither
 
 	private def OnPlayerScoreChanged(sender as object, e as EventArgs):
-		player.Movement.IncreaseVerticalMovementSpeedByFactor(0.01)
+		player.Movement.IncreaseVerticalMovementSpeedByFactor(0.005)
 
 	private playerColor as GameColor
 	private player as Player
