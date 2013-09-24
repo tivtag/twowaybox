@@ -18,12 +18,12 @@ class TetrisPlayerSimulation:
 		if gameLost or (not player.Active):
 			return
 		
-		inputState = PlayerInputState.FromInput(player.Color)
+		inputState = PlayerInput.GetState(player.Color)
 		player.Update(inputState, oldInputState)
 		
 		EnsureBlockSpawned()
 		RotateBlock(inputState)
-		MoveBlockHorizontal(inputState)	
+		MoveBlockHorizontal(inputState)
 		MoveBlockVertical()
 		oldInputState = inputState
 
@@ -136,7 +136,7 @@ class TetrisPlayerSimulation:
 
 	# The player input of the last frame
 	private oldInputState as PlayerInputState
-	
+
 	private final player as Player
 	private final field as GameField
 	private final tetris as TetrisSimulation

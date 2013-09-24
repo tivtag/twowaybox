@@ -33,6 +33,9 @@ class StartState (IGameState):
 			gameView.DrawGizmos()
 
 	def OnGUI():
+		if GUIScaler.Enabled:
+			GUI.skin.button.fontSize = 16 * GUIScaler.Scale
+		
 		if stateMenuOpen:
 			HandleMenuStateGUI()
 		else:
@@ -52,7 +55,7 @@ class StartState (IGameState):
 			ExitGame()
 		
 		GUI.Label(Rect((Screen.width/2) - 120, Screen.height/2 + 50, 240, 40), GUI.tooltip)
-		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | v0.4")
+		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | v0.5")
 		
 		e = Event.current;
 		if e.type == EventType.KeyDown:
@@ -63,7 +66,8 @@ class StartState (IGameState):
 			scoresView.DrawGUI()
 
 	private def MenuButton(buttonText as string, buttonTooltip as string, offsetY as int):
-		return GUI.Button(Rect((Screen.width/2) - 100, Screen.height/2 + offsetY, 150, 30), GUIContent(buttonText, buttonTooltip))
+		area = Rect((Screen.width/2) - (75 * GUIScaler.Scale), Screen.height/2 + (offsetY * GUIScaler.Scale), 150 * GUIScaler.Scale, 30 * GUIScaler.Scale)
+		return GUI.Button(area, GUIContent(buttonText, buttonTooltip))
 
 	private def HandleNonMenuStateGUI():
 		e = Event.current;

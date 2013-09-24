@@ -14,6 +14,7 @@ class GameView:
 		
 		self.scoresView = ScoresView(game)
 		self.victoryView = GameVictoryView(game, self)
+		self.buttonInputView = ButtonInputView(game)
 
 	private def CreateFieldViews(selector as MaterialSelector):
 		sideLength = ViewConstants.HalfWorldSize.x
@@ -44,6 +45,7 @@ class GameView:
 				view.DrawGizmos()
 
 	def DrawGUI():
+		buttonInputView.DrawGUI()
 		scoresView.DrawGUI()
 
 	private def OnGameSideChanging(sender as object, message as GameSideChangeMessage):
@@ -106,6 +108,7 @@ class GameView:
 	private final tetrisViews as (TetrisView) = array(TetrisView, GameSide._Count)
 	private final scoresView as ScoresView
 	private final victoryView as GameVictoryView
+	private final buttonInputView as ButtonInputView
 
 	private final camera as Camera
 	private final blockViewFactory as BlockViewFactory

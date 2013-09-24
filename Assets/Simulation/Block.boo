@@ -23,7 +23,7 @@ class Block:
 			
 			for cellOffset in rotation.CellOffsets:
 				list.Add(Cell(position + cellOffset, color))
-				
+			
 			return list
 
 	CellCount as int:
@@ -49,6 +49,10 @@ class Block:
 				max = System.Math.Max(max, cell.Position.y)
 			
 			return Point2(min, max)
+
+	Position as Point2:
+		get:
+			return position
 
 	def constructor(template as BlockTemplate, color as GameColor, side as GameSide):
 		self.template = template
