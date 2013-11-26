@@ -55,7 +55,7 @@ class StartState (IGameState):
 			ExitGame()
 		
 		GUI.Label(Rect((Screen.width/2) - 120, Screen.height/2 + 50, 240, 40), GUI.tooltip)
-		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | v0.5")
+		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | v0.6")
 		
 		e = Event.current;
 		if e.type == EventType.KeyDown:
