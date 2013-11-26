@@ -19,6 +19,8 @@ class FourMatchGameMode (IGameMode):
 
 	def OnEnter():
 		changeSideAfterClearInSeconds = 0.0
+		game.ResetFieldsSplit()
+		
 		game.ClearCountChanged += OnClearCountChanged
 
 	def OnLeave():

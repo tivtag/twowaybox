@@ -2,7 +2,7 @@
 # Extends the Unity Input class with PlayerInputState parsing and support
 # for dynamically injecting input state
 class PlayerInput:
-	public static final UseInjectedInput as bool = (Application.platform == RuntimePlatform.Android)
+	public static final UseInjectedInput as bool = PlatformHelper.IsTouch
 
 	static def GetState(playerColor as GameColor):
 		if UseInjectedInput:

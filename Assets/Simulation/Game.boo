@@ -88,7 +88,15 @@ class Game:
 		
 		for tetris in tetrises:
 			tetris.Reset()
-
+	
+	def ResetFieldsSplit():
+		for tetris in tetrises:
+			tetris.Field.ResetSplit()
+	
+	def ResetFields(color as GameColor):
+		for tetris in tetrises:
+			tetris.Field.Reset(color)
+	
     # Change active game side
 	def RequestSideChange(newSide as GameSide):
 		# Only allow one active side change

@@ -20,12 +20,17 @@ class SinglePlayerGameMode (IGameMode):
 		pass
 
 	def OnEnter():
-		player = game.GetPlayer(self.playerColor)
-		game.ClearCountChanged += OnClearCountChanged
-		player.Score.Changed += OnPlayerScoreChanged
+		player = game.GetPlayer(self.playerColor)		
+		oppositeColor = self.playerColor.GetOpposite()
+			
+		game.ResetFields(oppositeColor)
 		
 		# Deactive other player
-		game.GetPlayer(self.playerColor.GetOpposite()).Active = false
+		game.GetPlayer(oppositeColor).Active = false
+		
+		# Hook events
+		game.ClearCountChanged += OnClearCountChanged
+		player.Score.Changed += OnPlayerScoreChanged
 
 	def OnLeave():
 		game.ClearCountChanged -= OnClearCountChanged
@@ -37,7 +42,7 @@ class SinglePlayerGameMode (IGameMode):
 			game.Victory = GameVictory.Neither
 
 	private def OnPlayerScoreChanged(sender as object, e as EventArgs):
-		player.Movement.IncreaseVerticalMovementSpeedByFactor(0.005)
+		player.Movement.IncreaseVerticalMovementSpeedByFactor(0.0025)
 
 	private playerColor as GameColor
 	private player as Player

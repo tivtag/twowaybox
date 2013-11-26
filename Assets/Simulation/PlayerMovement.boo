@@ -37,11 +37,28 @@ class PlayerMovement:
 
 	private def UpdateHorizontal(inputState as PlayerInputState, oldInputState as PlayerInputState):
 		horizontalTimer -= Time.deltaTime
+		horizontalSlidingTimer += Time.deltaTime
 		
 		# Reset timer on first press down to decrease felt input latency
 		if oldInputState.HorizontalMovement == 0 and inputState.HorizontalMovement != 0:
 			horizontalTimer = 0.0
-			horizontalSlidingActive = false
+			StopHorizontalSlide()
+		
+		# When no movement:
+		elif inputState.HorizontalMovement == 0:
+			StopHorizontalSlide()
+		
+		# Check sliding time
+		if not horizontalSlidingActive and horizontalSlidingTimer >= SimulationConstants.HorizontalSlideMovementStartTime:
+			StartHorizontalSlide()
+
+	private def StartHorizontalSlide():
+		horizontalSlidingActive = true
+		horizontalTimer = 0.0
+
+	private def StopHorizontalSlide():
+		horizontalSlidingActive = false
+		horizontalSlidingTimer = 0.0	
 
 	private def UpdateRotation(inputState as PlayerInputState, oldInputState as PlayerInputState):
 		rotationTimer -= Time.deltaTime
@@ -51,6 +68,9 @@ class PlayerMovement:
 	def Reset():
 		verticalDropTimer = 0.0
 		verticalSingleStepMovementTime = SimulationConstants.VerticalSingleStepMovementTime
+		
+		horizontalSlidingTimer = 0.0
+		horizontalSlidingActive = false
 		
 		ResetVerticalTimer()
 		ResetHorizontalTimer()
@@ -68,7 +88,6 @@ class PlayerMovement:
 			horizontalTimer = SimulationConstants.HorizontalSlideMovementTime
 		else:
 			horizontalTimer = SimulationConstants.HorizontalSingleStepMovementTime
-			horizontalSlidingActive = true
 
 	def ResetRotationTimer():
 		rotationTimer = SimulationConstants.RotationTime
@@ -79,6 +98,7 @@ class PlayerMovement:
 	# Left/Right-Movement. Sliding starts after first single-step movement, and is faster.
 	private horizontalTimer as single
 	private horizontalSlidingActive as bool
+	private horizontalSlidingTimer as single
 		
 	# Up/Down-Movement. Blocks can only go into one verticalDirection per player
 	private verticalDropTimer as single

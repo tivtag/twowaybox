@@ -11,6 +11,8 @@ class Main (MonoBehaviour):
 	public MainLight as Light
 
 	def Start():
+		SimulationConstants.Configure()
+		
 		game = Game()
 		gameView = GameView(game, MainCamera, MaterialSelector(BlackCubePrefab, WhiteCubePrefab, FillerCubePrefab))
 		

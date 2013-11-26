@@ -51,7 +51,6 @@ class TetrisSimulation:
 		Victory = GameColor.None
 		simulationBlack.Reset()
 		simulationWhite.Reset()
-		field.Reset()
 
 	# The color of the player that won this Tetris game
 	private victory as GameColor

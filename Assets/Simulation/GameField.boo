@@ -120,7 +120,8 @@ class GameField:
 	def IsFillerIndex(position as Point2):
 		return IsValidIndex(position) and (position.x < SimulationConstants.HalfFillerSize.x or position.x >= (SimulationConstants.MatrixSize.x-SimulationConstants.HalfFillerSize.x))
 
-	def Reset():
+	# Resets the game field to be evenly split Black/White
+	def ResetSplit():
 		for row in range(size.y):
 			for column in range(size.x):
 				position = Point2(column, row)
@@ -128,5 +129,14 @@ class GameField:
 				
 				SetCell(Cell(position, color))
 
+	# Resets the game field to be fully filled in the given color
+	def Reset(color as GameColor):
+		for row in range(size.y):
+			for column in range(size.x):
+				cellPosition = Point2(column, row)
+				cellColor = (GameColor.None if IsFillerIndex(cellPosition) else color)
+				
+				SetCell(Cell(cellPosition, cellColor))
+	
 	private final size as Point2
 	private final cells as (GameColor, 2)

@@ -23,12 +23,18 @@ class SimulationConstants:
 	public static final RotationTime = 0.28
 
 	# Left/Right movement
-	public static final HorizontalSingleStepMovementTime = 0.12
+	public static HorizontalSingleStepMovementTime = 0.12
 	public static final HorizontalSlideMovementTime = 0.06
+	public static HorizontalSlideMovementStartTime = 0.15
 
 	# Top/Bottom movement
 	public static final VerticalSingleStepMovementTime = 1.1
-	public static final VerticalDropTimeMultiplicator = 20
+	public static final VerticalDropTimeMultiplicator = 21
 
 	# The time in seconds for which after a drop the next block won't start moving quickly
 	public static final VerticalDropTimer as single = 0.1
+	
+	static def Configure():
+		if PlatformHelper.IsTouch:
+			HorizontalSingleStepMovementTime = 0.30
+			HorizontalSlideMovementStartTime = 0.40
