@@ -30,7 +30,7 @@ class GameState (IGameState):
 		states.ChangeTo[of StartState]()
 
 	private def HandleInput():
-		e = Event.current;
+		e = Event.current
 		if e.type == EventType.KeyDown and e.keyCode == KeyCode.Escape:
 			ChangeToStartState()
 

@@ -57,7 +57,7 @@ class StartState (IGameState):
 		
 		if MenuButton("Exit", "", 7):
 			ExitGame()
-			
+		
 		centeredLabelStyle = GUI.skin.GetStyle("Label")
 		centeredLabelStyle.alignment = TextAnchor.UpperCenter
 		GUI.Label(Rect(Screen.width/2 - 130, Screen.height/2 + (80 * GUIScaler.Scale), 260, 40), GUI.tooltip, centeredLabelStyle)
