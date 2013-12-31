@@ -5,10 +5,14 @@ class PlayerInput:
 	public static final UseInjectedInput as bool = PlatformHelper.IsTouch
 
 	static def GetState(playerColor as GameColor):
+		keyboardInput = GetKeyboardInput(playerColor);
+		
 		if UseInjectedInput:
-			return GetInjectedInput(playerColor)
+			injectedInput = GetInjectedInput(playerColor)
+			mergedInput = PlayerInputState.Merge(keyboardInput, injectedInput)
+			return mergedInput
 		else:
-			return GetKeyboardInput(playerColor)
+			return keyboardInput
 
 	private static def GetKeyboardInput(playerColor as GameColor):
 		drop               = Input.GetAxis(playerColor.ToString() + "-Drop") == 1
@@ -28,6 +32,6 @@ class PlayerInput:
 			whiteState = state
 		else:
 			blackState = state
-	
+
 	private static whiteState as PlayerInputState
 	private static blackState as PlayerInputState

@@ -9,3 +9,10 @@ struct PlayerInputState:
 		self.HorizontalMovement = horizontalMovement
 		self.Drop = drop
 		self.RotateDirection = rotateDirection
+
+	static def Merge(inputA as PlayerInputState, inputB as PlayerInputState):
+		horizontalMovement = (inputB.HorizontalMovement if inputA.HorizontalMovement == 0 else inputA.HorizontalMovement)
+		drop = inputA.Drop or inputB.Drop
+		rotateDirection = (inputB.RotateDirection if inputA.RotateDirection == 0 else inputA.RotateDirection)
+		
+		return PlayerInputState(horizontalMovement, drop, rotateDirection)
