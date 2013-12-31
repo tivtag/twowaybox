@@ -61,7 +61,7 @@ class StartState (IGameState):
 		centeredLabelStyle = GUI.skin.GetStyle("Label")
 		centeredLabelStyle.alignment = TextAnchor.UpperCenter
 		GUI.Label(Rect(Screen.width/2 - 130, Screen.height/2 + (80 * GUIScaler.Scale), 260, 40), GUI.tooltip, centeredLabelStyle)
-		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | v0.6")
+		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | v0.7")
 		
 		e = Event.current;
 		if e.type == EventType.KeyDown:

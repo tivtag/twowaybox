@@ -75,7 +75,7 @@ PlayerSettings:
     Others: 1
   iPhoneBundleIdentifier: com.federrot.lstdt
   productGUID: 5fe32a454ad9c4947a52c29db6450805
-  iPhoneBundleVersion: 0.6
+  iPhoneBundleVersion: 0.7
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
@@ -120,6 +120,12 @@ PlayerSettings:
   - m_BuildTarget: Web
     m_StaticBatching: 0
     m_DynamicBatching: 1
+  - m_BuildTarget: Standalone
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
+  - m_BuildTarget: WP8
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   wiiRegion: 1
@@ -160,13 +166,14 @@ PlayerSettings:
   scriptingDefineSymbols: {}
   metroPackageName: Istdt
   metroPackageLogo: 
-  metroPackageVersion: 1.0.0.0
+  metroPackageVersion: 0.7.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Istdt
+  metroApplicationDescription: Inverse-Space Three-D Two-Player Tetris by Paul Ennemoser
+    (tivtag)
   metroTileLogo: 
   metroTileWideLogo: 
   metroTileSmallLogo: 
