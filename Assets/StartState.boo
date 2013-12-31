@@ -41,7 +41,11 @@ class StartState (IGameState):
 		else:
 			HandleNonMenuStateGUI()
 
-	private def HandleMenuStateGUI():
+	private def HandleMenuStateGUI():		
+		if gameStartCount > 0 and game.Victory == GameVictory.None:
+			if MenuButton("Continue game", "Continue playing a running game!", -197):
+				ContinueGame()
+		
 		if MenuButton("Start 1P black", "Play black alone!", -140):
 			StartGame[of SinglePlayerGameMode]({mode|mode.PlayerColor = GameColor.Black})
 		
@@ -53,8 +57,10 @@ class StartState (IGameState):
 		
 		if MenuButton("Exit", "", 7):
 			ExitGame()
-		
-		GUI.Label(Rect((Screen.width/2) - 120, Screen.height/2 + 50, 240, 40), GUI.tooltip)
+			
+		centeredLabelStyle = GUI.skin.GetStyle("Label")
+		centeredLabelStyle.alignment = TextAnchor.UpperCenter
+		GUI.Label(Rect(Screen.width/2 - 130, Screen.height/2 + (80 * GUIScaler.Scale), 260, 40), GUI.tooltip, centeredLabelStyle)
 		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | v0.6")
 		
 		e = Event.current;
@@ -66,7 +72,7 @@ class StartState (IGameState):
 			scoresView.DrawGUI()
 
 	private def MenuButton(buttonText as string, buttonTooltip as string, offsetY as int):
-		area = Rect((Screen.width/2) - (75 * GUIScaler.Scale), Screen.height/2 + (offsetY * GUIScaler.Scale), 150 * GUIScaler.Scale, 30 * GUIScaler.Scale)
+		area = Rect((Screen.width/2) - (75 * GUIScaler.Scale), Screen.height/2 + ((offsetY+20) * GUIScaler.Scale), 150 * GUIScaler.Scale, 30 * GUIScaler.Scale)
 		return GUI.Button(area, GUIContent(buttonText, buttonTooltip))
 
 	private def HandleNonMenuStateGUI():
@@ -88,17 +94,33 @@ class StartState (IGameState):
 		light.color = Color.white
 		light.intensity = 5.05
 
-	private def StartGame[of TGameMode(IGameMode)](initializer as System.Action[of TGameMode]):
+	def Reset():
+		pass
+
+	private def ContinueGame():
 		states.ChangeTo[of GameState]()
+		game.Continue()
+
+	private def StartGame[of TGameMode(IGameMode)](initializer as System.Action[of TGameMode]):
+		# Change Game State
+		gameState = states.ChangeTo[of GameState]()		
+		gameState.Reset()
+		
+		# Change Game Mode
 		mode = gameModes.Get[of TGameMode]()
 		if not initializer is null:
 			initializer(mode)
+			
+		gameModes.Set(null)
 		gameModes.Set(mode)
+		
+		gameStartCount += 1
 
 	private angle as single = 90.0
 	private upVector as Vector3 = Vector3.down
 
 	private stateMenuOpen as bool
+	private gameStartCount as int
 
 	private final game as Game
 	private final gameView as GameView

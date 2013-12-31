@@ -18,7 +18,7 @@ class GameStateManager:
 		return null
 
 	def ChangeTo[of T]():
-		Set(Get[of T]())
+		return Set(Get[of T]())
 
 	def ChangeToNone():
 		Set(null)
@@ -30,6 +30,8 @@ class GameStateManager:
 			activeState = newState
 			if newState != null:
 				newState.OnEnter()
+					
+		return newState
 
 	def Update():
 		if activeState != null:

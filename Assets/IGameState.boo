@@ -4,4 +4,5 @@ interface IGameState:
 	def OnDrawGizmos()
 	def OnGUI()
 	def OnEnter()
-	def OnLeave()
+	def OnLeave()	
+	def Reset()

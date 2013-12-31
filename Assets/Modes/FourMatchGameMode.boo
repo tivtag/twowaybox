@@ -18,10 +18,12 @@ class FourMatchGameMode (IGameMode):
 		pass
 
 	def OnEnter():
+		Reset()
+		game.ClearCountChanged += OnClearCountChanged
+
+	def Reset():
 		changeSideAfterClearInSeconds = 0.0
 		game.ResetFieldsSplit()
-		
-		game.ClearCountChanged += OnClearCountChanged
 
 	def OnLeave():
 		game.ClearCountChanged -= OnClearCountChanged

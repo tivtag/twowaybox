@@ -27,7 +27,6 @@ class GameState (IGameState):
 			gameModes.OnGUI()
 
 	private def ChangeToStartState():
-		gameModes.ChangeToNone()
 		states.ChangeTo[of StartState]()
 
 	private def HandleInput():
@@ -40,6 +39,9 @@ class GameState (IGameState):
 			ChangeToStartState()
 
 	def OnEnter():
+		pass
+
+	def Reset():
 		game.StartNew()
 
 	def OnLeave():

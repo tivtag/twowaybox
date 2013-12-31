@@ -88,7 +88,14 @@ class Game:
 		
 		for tetris in tetrises:
 			tetris.Reset()
-	
+			
+	def Continue():
+		RefocusActiveSide()
+
+	private def RefocusActiveSide():		
+		if activeTetris is not null:
+			RequestSideChange(activeTetris.Side)
+
 	def ResetFieldsSplit():
 		for tetris in tetrises:
 			tetris.Field.ResetSplit()
