@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\GameState.boo" />
      <Compile Include="Assets\GameStateManager.boo" />
+     <Compile Include="Assets\GameVersion.boo" />
      <Compile Include="Assets\IGameState.boo" />
      <Compile Include="Assets\Infrastructure\MathHelper.boo" />
      <Compile Include="Assets\Infrastructure\Message.boo" />
