@@ -22,7 +22,8 @@ class GameVictoryView:
 				case GameVictory.Both:
 					text.Show("~ draw ~", Color.gray)
 				case GameVictory.Neither:
-					text.Show("- lost -", Color.gray)
+					score = game.PlayerSingle.Score.Value
+					text.Show(score.ToString(), Color.gray)
 				otherwise:
 					text.Hide()
 

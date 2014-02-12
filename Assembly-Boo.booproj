@@ -1,109 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-	<ProductVersion>10.0.20506</ProductVersion>
-	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{635FAF1C-B8C3-3CB4-C1C0-348474BDC5DD}</ProjectGuid>
-	<OutputType>Library</OutputType>
-	<AppDesignerFolder>Properties</AppDesignerFolder>
-	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-Boo</AssemblyName>
-	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-	<FileAlignment>512</FileAlignment>
-	<BaseDirectory>Assets</BaseDirectory>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{635FAF1C-B8C3-3CB4-C1C0-348474BDC5DD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-Boo</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	<DebugSymbols>true</DebugSymbols>
-	<DebugType>full</DebugType>
-	<Optimize>false</Optimize>
-	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
-	<NoWarn>0169</NoWarn>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <genwarnings>False</genwarnings>
+    <ducky>False</ducky>
+    <culture />
+    <nostdlib>False</nostdlib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	<DebugType>pdbonly</DebugType>
-	<Optimize>true</Optimize>
-	<OutputPath>Temp\bin\Release\</OutputPath>
-	<DefineConstants>TRACE</DefineConstants>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
-	<NoWarn>0169</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <genwarnings>False</genwarnings>
+    <ducky>False</ducky>
+    <culture />
+    <nostdlib>False</nostdlib>
   </PropertyGroup>
   <ItemGroup>
-	<Reference Include="System" />
-    <Reference Include="System.XML" />
-	<Reference Include="System.Core" />
-	<Reference Include="System.Xml.Linq" />
-	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
-	</Reference>
-	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
-	</Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GameState.boo" />
-     <Compile Include="Assets\GameStateManager.boo" />
-     <Compile Include="Assets\IGameState.boo" />
-     <Compile Include="Assets\Infrastructure\MathHelper.boo" />
-     <Compile Include="Assets\Infrastructure\Message.boo" />
-     <Compile Include="Assets\Infrastructure\MessageHandler.boo" />
-     <Compile Include="Assets\Infrastructure\MessageHub.boo" />
-     <Compile Include="Assets\Infrastructure\PlatformHelper.boo" />
-     <Compile Include="Assets\Infrastructure\Point2.boo" />
-     <Compile Include="Assets\Main.boo" />
-     <Compile Include="Assets\Modes\FourMatchGameMode.boo" />
-     <Compile Include="Assets\Modes\IGameMode.boo" />
-     <Compile Include="Assets\Modes\SinglePlayerGameMode.boo" />
-     <Compile Include="Assets\Simulation\Block.boo" />
-     <Compile Include="Assets\Simulation\BlockEventArgs.boo" />
-     <Compile Include="Assets\Simulation\BlockFactory.boo" />
-     <Compile Include="Assets\Simulation\BlockRotation.boo" />
-     <Compile Include="Assets\Simulation\BlockTemplate.boo" />
-     <Compile Include="Assets\Simulation\Cell.boo" />
-     <Compile Include="Assets\Simulation\CellChangedEventArgs.boo" />
-     <Compile Include="Assets\Simulation\CollisionState.boo" />
-     <Compile Include="Assets\Simulation\Game.boo" />
-     <Compile Include="Assets\Simulation\GameColor.boo" />
-     <Compile Include="Assets\Simulation\GameColorExtensions.boo" />
-     <Compile Include="Assets\Simulation\GameField.boo" />
-     <Compile Include="Assets\Simulation\GameSide.boo" />
-     <Compile Include="Assets\Simulation\GameSideChangeMessage.boo" />
-     <Compile Include="Assets\Simulation\GameSideExtensions.boo" />
-     <Compile Include="Assets\Simulation\GameVictory.boo" />
-     <Compile Include="Assets\Simulation\MoveDirection.boo" />
-     <Compile Include="Assets\Simulation\MoveEventArgs.boo" />
-     <Compile Include="Assets\Simulation\Player.boo" />
-     <Compile Include="Assets\Simulation\PlayerBlocks.boo" />
-     <Compile Include="Assets\Simulation\PlayerInput.boo" />
-     <Compile Include="Assets\Simulation\PlayerInputState.boo" />
-     <Compile Include="Assets\Simulation\PlayerMovement.boo" />
-     <Compile Include="Assets\Simulation\PlayerScore.boo" />
-     <Compile Include="Assets\Simulation\SimulationConstants.boo" />
-     <Compile Include="Assets\Simulation\TetrisPlayerSimulation.boo" />
-     <Compile Include="Assets\Simulation\TetrisSimulation.boo" />
-     <Compile Include="Assets\StartState.boo" />
-     <Compile Include="Assets\View\BlockView.boo" />
-     <Compile Include="Assets\View\BlockViewFactory.boo" />
-     <Compile Include="Assets\View\ButtonInputView.boo" />
-     <Compile Include="Assets\View\Cube.boo" />
-     <Compile Include="Assets\View\GUIScaler.boo" />
-     <Compile Include="Assets\View\GameFieldView.boo" />
-     <Compile Include="Assets\View\GamePlane.boo" />
-     <Compile Include="Assets\View\GamePlaneText.boo" />
-     <Compile Include="Assets\View\GameVictoryView.boo" />
-     <Compile Include="Assets\View\GameView.boo" />
-     <Compile Include="Assets\View\GizmoHelper.boo" />
-     <Compile Include="Assets\View\MaterialSelector.boo" />
-     <Compile Include="Assets\View\ScoresView.boo" />
-     <Compile Include="Assets\View\SmoothCameraTransition.boo" />
-     <Compile Include="Assets\View\TetrisVictoryView.boo" />
-     <Compile Include="Assets\View\TetrisView.boo" />
-     <Compile Include="Assets\View\ViewConstants.boo" />
+    <Compile Include="Assets\GameState.boo" />
+    <Compile Include="Assets\GameStateManager.boo" />
+    <Compile Include="Assets\IGameState.boo" />
+    <Compile Include="Assets\Infrastructure\MathHelper.boo" />
+    <Compile Include="Assets\Infrastructure\Message.boo" />
+    <Compile Include="Assets\Infrastructure\MessageHandler.boo" />
+    <Compile Include="Assets\Infrastructure\MessageHub.boo" />
+    <Compile Include="Assets\Infrastructure\PlatformHelper.boo" />
+    <Compile Include="Assets\Infrastructure\Point2.boo" />
+    <Compile Include="Assets\Main.boo" />
+    <Compile Include="Assets\Modes\FourMatchGameMode.boo" />
+    <Compile Include="Assets\Modes\IGameMode.boo" />
+    <Compile Include="Assets\Modes\SinglePlayerGameMode.boo" />
+    <Compile Include="Assets\Simulation\Block.boo" />
+    <Compile Include="Assets\Simulation\BlockEventArgs.boo" />
+    <Compile Include="Assets\Simulation\BlockFactory.boo" />
+    <Compile Include="Assets\Simulation\BlockRotation.boo" />
+    <Compile Include="Assets\Simulation\BlockTemplate.boo" />
+    <Compile Include="Assets\Simulation\Cell.boo" />
+    <Compile Include="Assets\Simulation\CellChangedEventArgs.boo" />
+    <Compile Include="Assets\Simulation\CollisionState.boo" />
+    <Compile Include="Assets\Simulation\Game.boo" />
+    <Compile Include="Assets\Simulation\GameColor.boo" />
+    <Compile Include="Assets\Simulation\GameColorExtensions.boo" />
+    <Compile Include="Assets\Simulation\GameField.boo" />
+    <Compile Include="Assets\Simulation\GameSide.boo" />
+    <Compile Include="Assets\Simulation\GameSideChangeMessage.boo" />
+    <Compile Include="Assets\Simulation\GameSideExtensions.boo" />
+    <Compile Include="Assets\Simulation\GameVictory.boo" />
+    <Compile Include="Assets\Simulation\MoveDirection.boo" />
+    <Compile Include="Assets\Simulation\MoveEventArgs.boo" />
+    <Compile Include="Assets\Simulation\Player.boo" />
+    <Compile Include="Assets\Simulation\PlayerBlocks.boo" />
+    <Compile Include="Assets\Simulation\PlayerInput.boo" />
+    <Compile Include="Assets\Simulation\PlayerInputState.boo" />
+    <Compile Include="Assets\Simulation\PlayerMovement.boo" />
+    <Compile Include="Assets\Simulation\PlayerScore.boo" />
+    <Compile Include="Assets\Simulation\SimulationConstants.boo" />
+    <Compile Include="Assets\Simulation\TetrisPlayerSimulation.boo" />
+    <Compile Include="Assets\Simulation\TetrisSimulation.boo" />
+    <Compile Include="Assets\StartState.boo" />
+    <Compile Include="Assets\View\BlockView.boo" />
+    <Compile Include="Assets\View\BlockViewFactory.boo" />
+    <Compile Include="Assets\View\ButtonInputView.boo" />
+    <Compile Include="Assets\View\Cube.boo" />
+    <Compile Include="Assets\View\GUIScaler.boo" />
+    <Compile Include="Assets\View\GameFieldView.boo" />
+    <Compile Include="Assets\View\GamePlane.boo" />
+    <Compile Include="Assets\View\GamePlaneText.boo" />
+    <Compile Include="Assets\View\GameVictoryView.boo" />
+    <Compile Include="Assets\View\GameView.boo" />
+    <Compile Include="Assets\View\GizmoHelper.boo" />
+    <Compile Include="Assets\View\MaterialSelector.boo" />
+    <Compile Include="Assets\View\ScoresView.boo" />
+    <Compile Include="Assets\View\SmoothCameraTransition.boo" />
+    <Compile Include="Assets\View\TetrisVictoryView.boo" />
+    <Compile Include="Assets\View\TetrisView.boo" />
+    <Compile Include="Assets\View\ViewConstants.boo" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -113,5 +120,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>

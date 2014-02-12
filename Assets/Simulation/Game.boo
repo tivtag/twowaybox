@@ -31,6 +31,13 @@ class Game:
 	PlayerBlack as Player:
 		get: return playerBlack
 
+	PlayerSingle as Player:
+		get:
+			if PlayerWhite.Active:
+				return PlayerWhite
+			else:
+				return PlayerBlack
+
 	ClearCountWhite as int:
 		get: return clearCountWhite
 
