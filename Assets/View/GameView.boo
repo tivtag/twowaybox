@@ -81,7 +81,6 @@ class GameView:
 		LookAt(tetrisView, ViewConstants.CameraTransitionTime)
 
 	def LookAt(tetrisView as TetrisView, transitionTime as single):
-		# oldOpposite = GetOpposite(activeTetrisView)
 		newOpposite = GetOpposite(tetrisView)
 		
 		oppositePlane = newOpposite.Plane
@@ -90,9 +89,6 @@ class GameView:
 		
 		cameraTransition = SmoothCameraTransition(camera, camera.transform.position, camera.transform.forward, targetPosition, targetTarget, transitionTime)
 		activeTetrisView = tetrisView
-		
-		# oldOpposite.Visible = true if oldOpposite is not null
-		# newOpposite.Visible = false
 
 	def LookAtCenter(offset as Vector3):
 		camera.transform.position = offset
