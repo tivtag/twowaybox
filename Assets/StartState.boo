@@ -41,15 +41,16 @@ class StartState (IGameState):
 		else:
 			HandleNonMenuStateGUI()
 
-	private def HandleMenuStateGUI():		
+	private def HandleMenuStateGUI():
+		# Menu Buttons	
 		if gameStartCount > 0 and game.Victory == GameVictory.None:
-			if MenuButton("Continue game", "Continue playing a running game!", -197):
+			if MenuButton("Continue game", "Continue playing a running game.. enjoy your break.", -197):
 				ContinueGame()
 		
-		if MenuButton("Start 1P black", "Play black alone!", -140):
+		if MenuButton("Start 1P black", "Play black alone - how long can you keep up?", -140):
 			StartGame[of SinglePlayerGameMode]({mode|mode.PlayerColor = GameColor.Black})
 		
-		if MenuButton("Start 1P white", "Play white alone!", -107):
+		if MenuButton("Start 1P white", "Play white alone - how long can you keep up?", -107):
 			StartGame[of SinglePlayerGameMode]({mode|mode.PlayerColor = GameColor.White})
 		
 		if MenuButton("Start 2P game", "Two Players - most clears after 4 matches wins!", -50):
@@ -58,16 +59,24 @@ class StartState (IGameState):
 		if MenuButton("Exit", "", 7):
 			ExitGame()
 		
-		centeredLabelStyle = GUI.skin.GetStyle("Label")
-		centeredLabelStyle.alignment = TextAnchor.UpperCenter
-		GUI.Label(Rect(Screen.width/2 - 130, Screen.height/2 + (80 * GUIScaler.Scale), 260, 40), GUI.tooltip, centeredLabelStyle)
-		GUI.Label(Rect(4, Screen.height - 20, 140, 20), "Paul Ennemoser | " + GameVersion.Text)
+		# Tooltip
+		if GUI.tooltip.Length > 0:
+			tooltipStyle = GUIStyle(GUI.skin.GetStyle("Label"))
+			tooltipStyle.alignment = TextAnchor.UpperCenter
+			tooltipStyle.fontSize = 14 * GUIScaler.Scale
+			
+			GUI.Label(Rect(Screen.width/2 - (130 * GUIScaler.Scale), Screen.height/2 + (100 * GUIScaler.Scale), 260 * GUIScaler.Scale, 40 * GUIScaler.Scale), GUI.tooltip, tooltipStyle)
 		
+		# Version
+		GUI.Label(Rect(3, Screen.height - 20, 140, 20), "Paul Ennemoser | " + GameVersion.Text)
+		
+		# Hide menu
 		e = Event.current;
 		if e.type == EventType.KeyDown:
 			if e.keyCode == KeyCode.Escape:
 				stateMenuOpen = false
 		
+		# Draw score after a game
 		if game.Victory != GameVictory.None:
 			scoresView.DrawGUI()
 
