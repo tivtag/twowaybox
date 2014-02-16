@@ -99,7 +99,12 @@ class StartState (IGameState):
 		Application.Quit()
 
 	def OnEnter():
-		light.intensity = 2.10
+		if initialEnter:
+			light.color = Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value)
+			light.intensity = 20.0
+			initialEnter = false
+		else:
+			light.intensity = 2.10
 
 	def OnLeave():
 		light.color = Color.white
@@ -132,6 +137,7 @@ class StartState (IGameState):
 
 	private stateMenuOpen as bool
 	private gameStartCount as int
+	private initialEnter as bool = true
 
 	private final game as Game
 	private final gameView as GameView
