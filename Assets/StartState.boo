@@ -56,19 +56,21 @@ class StartState (IGameState):
 		if MenuButton("Start 2P game", "Two Players - most clears after 4 matches wins!", -50):
 			StartGame[of FourMatchGameMode](null)
 		
-		if MenuButton("Exit", "", 7):
+		if MenuButton("Exit", "Sayounara!", 7):
 			ExitGame()
 		
 		# Tooltip
 		if GUI.tooltip.Length > 0:
 			tooltipStyle = GUIStyle(GUI.skin.GetStyle("Label"))
 			tooltipStyle.alignment = TextAnchor.UpperCenter
-			tooltipStyle.fontSize = 14 * GUIScaler.Scale
+			tooltipStyle.fontSize = System.Math.Max(10 * GUIScaler.Scale, 14)			
+			tooltipWidth = Math.Min(240 * GUIScaler.Scale, Screen.width)
 			
-			GUI.Label(Rect(Screen.width/2 - (130 * GUIScaler.Scale), Screen.height/2 + (100 * GUIScaler.Scale), 260 * GUIScaler.Scale, 40 * GUIScaler.Scale), GUI.tooltip, tooltipStyle)
+			tooltipArea = Rect(Screen.width/2 - (tooltipWidth/2), Screen.height/2 + (120 * GUIScaler.Scale), tooltipWidth, 50 * GUIScaler.Scale)
+			GUI.Label(tooltipArea, GUI.tooltip, tooltipStyle)
 		
 		# Version
-		GUI.Label(Rect(3, Screen.height - 20, 140, 20), "Paul Ennemoser | " + GameVersion.Text)
+		GUI.Label(Rect(3, Screen.height - 20, 200, 20), "Paul Ennemoser | " + GameVersion.Text)
 		
 		# Hide menu
 		e = Event.current;
@@ -81,7 +83,7 @@ class StartState (IGameState):
 			scoresView.DrawGUI()
 
 	private def MenuButton(buttonText as string, buttonTooltip as string, offsetY as int):
-		area = Rect((Screen.width/2) - (75 * GUIScaler.Scale), Screen.height/2 + ((offsetY+20) * GUIScaler.Scale), 150 * GUIScaler.Scale, 30 * GUIScaler.Scale)
+		area = Rect((Screen.width/2) - (75 * GUIScaler.Scale), Screen.height/2 + ((offsetY+60) * GUIScaler.Scale), 150 * GUIScaler.Scale, 30 * GUIScaler.Scale)
 		return GUI.Button(area, GUIContent(buttonText, buttonTooltip))
 
 	private def HandleNonMenuStateGUI():
