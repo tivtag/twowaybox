@@ -56,7 +56,7 @@ class StartState (IGameState):
 		if MenuButton("Start 2P game", "Two Players - most clears after 4 matches wins!", -50):
 			StartGame[of FourMatchGameMode](null)
 		
-		if MenuButton("Exit", "Sayounara!", 7):
+		if MenuButton("Exit", "Sayounara.", 7):
 			ExitGame()
 		
 		# Tooltip
