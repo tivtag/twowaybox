@@ -104,11 +104,11 @@ class StartState (IGameState):
 			light.intensity = 20.0
 			initialEnter = false
 		else:
-			light.intensity = 2.10
+			light.intensity = 3.0
 
 	def OnLeave():
 		light.color = Color.white
-		light.intensity = 5.05
+		light.intensity = 5.25
 
 	def Reset():
 		pass
