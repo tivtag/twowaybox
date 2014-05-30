@@ -12,7 +12,7 @@ class StartState (IGameState):
 		
 		
 		scale = GUIScaler.Scale
-		if scale <> 1:
+		if scale != 1:
 			scale *= 0.125 // Only use part-scale
 		else:
 			scale = 0.0 // Disable extra distance
