@@ -10,7 +10,11 @@ class StartState (IGameState):
 		self.gameModes = gameModes
 		self.scoresView = ScoresView(game)
 		
-		gameView.LookAtCenter(Vector3(35, 0, 0))
+		
+		scale = GUIScaler.Scale
+		if scale > 1:
+			scale *= 0.125 // Only use part-scale
+		gameView.LookAtCenter(Vector3(35 + (35 * scale), 0, 0))
 
 	def Update():
 		rotationSpeed = Time.deltaTime * 20.0
@@ -101,14 +105,14 @@ class StartState (IGameState):
 	def OnEnter():
 		if initialEnter:
 			light.color = Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value)
-			light.intensity = 20.0
+			light.intensity = 24.0
 			initialEnter = false
 		else:
-			light.intensity = 3.0
+			light.intensity = 3.5
 
 	def OnLeave():
 		light.color = Color.white
-		light.intensity = 5.25
+		light.intensity = 5.3
 
 	def Reset():
 		pass
