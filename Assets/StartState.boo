@@ -12,8 +12,10 @@ class StartState (IGameState):
 		
 		
 		scale = GUIScaler.Scale
-		if scale > 1:
+		if scale <> 1:
 			scale *= 0.125 // Only use part-scale
+		else:
+			scale = 0.0 // Disable extra distance
 		gameView.LookAtCenter(Vector3(35 + (35 * scale), 0, 0))
 
 	def Update():
@@ -105,7 +107,7 @@ class StartState (IGameState):
 	def OnEnter():
 		if initialEnter:
 			light.color = Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value)
-			light.intensity = 24.0
+			light.intensity = 22.0
 			initialEnter = false
 		else:
 			light.intensity = 3.5
