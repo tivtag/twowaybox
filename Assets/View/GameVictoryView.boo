@@ -13,19 +13,29 @@ class GameVictoryView:
 		OnGameVictoryChanged()
 
 	private def OnGameVictoryChanged():
-		for text in texts:
 			match game.Victory:
 				case GameVictory.White:
-					text.Show("! white !", Color.white)
+					ShowVictoryWithScore("! white !", Color.white)
 				case GameVictory.Black:
-					text.Show("! black !", Color.black)
+					ShowVictoryWithScore("! black !", Color.black)
 				case GameVictory.Both:
-					text.Show("~ draw ~", Color.gray)
-				case GameVictory.Neither:
-					score = game.PlayerSingle.Score.Value
-					text.Show(score.ToString(), Color.gray)
-				otherwise:
-					text.Hide()
+					ShowVictoryWithScore("~ draw ~", Color.gray)
+				
+				case GameVictory.Neither:					
+					for text in texts:
+						score = game.PlayerSingle.Score.Value
+						text.Show(score.ToString(), Color.gray)
+				otherwise:					
+					for text in texts:
+						text.Hide()
+
+	private def ShowVictoryWithScore(text as string, victoryColor as Color):
+		for index in range(4):
+			texts[index].Show(text, victoryColor)
+		
+		# Include Score
+		texts[GameSide.Top].Show(game.PlayerWhite.Score.Value.ToString(), Color.white)
+		texts[GameSide.Bottom].Show(game.PlayerBlack.Score.Value.ToString(), Color.black)
 
 	private final texts as (GamePlaneText) = array(GamePlaneText, GameSide._Count)
 	private final game as Game
