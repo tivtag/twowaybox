@@ -9,13 +9,13 @@ class GamePlaneText:
 		Hide()
 
 	def Show(text as string, color as Color):
-		textObject.renderer.enabled = true
-		textObject.renderer.material.color = color
+		textObject.GetComponent[of Renderer]().enabled = true
+		textObject.GetComponent[of Renderer]().material.color = color
 		
 		mesh as TextMesh = textObject.GetComponent(TextMesh)
 		mesh.text = text
 
 	def Hide():
-		textObject.renderer.enabled = false
+		textObject.GetComponent[of Renderer]().enabled = false
 
 	private final textObject as GameObject

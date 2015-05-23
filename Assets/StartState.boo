@@ -10,7 +10,6 @@ class StartState (IGameState):
 		self.gameModes = gameModes
 		self.scoresView = ScoresView(game)
 		
-		
 		scale = GUIScaler.Scale
 		if scale != 1:
 			scale *= 0.125 // Only use part-scale
@@ -114,7 +113,7 @@ class StartState (IGameState):
 
 	def OnLeave():
 		light.color = Color.white
-		light.intensity = 5.3
+		light.intensity = 6.0
 
 	def Reset():
 		pass

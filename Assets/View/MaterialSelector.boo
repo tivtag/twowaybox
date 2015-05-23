@@ -17,7 +17,7 @@ class MaterialSelector:
 			return fillerPrefab
 
 	def GetMaterial(color as GameColor):
-		return GetPrefab(color).renderer.sharedMaterial
+		return GetPrefab(color).GetComponent[of Renderer]().sharedMaterial
 
 	private blackPrefab as GameObject
 	private whitePrefab as GameObject

@@ -138,5 +138,5 @@ class GameField:
 				
 				SetCell(Cell(cellPosition, cellColor))
 	
-	private final size as Point2
-	private final cells as (GameColor, 2)
+	private size as Point2
+	private cells as (GameColor, 2)

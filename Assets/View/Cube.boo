@@ -7,7 +7,7 @@ class Cube (Object):
 			return color
 		set:
 			color = value
-			cube.renderer.material = materialSelector.GetMaterial(value)
+			cube.GetComponent[of Renderer]().material = materialSelector.GetMaterial(value)
 
 	Position as Vector3:
 		get: return transform.position
@@ -19,8 +19,8 @@ class Cube (Object):
 		get: return plane
 
 	Visible as bool:
-		get: return cube.renderer.enabled
-		set: cube.renderer.enabled = value
+		get: return cube.GetComponent[of Renderer]().enabled
+		set: cube.GetComponent[of Renderer]().enabled = value
 
 	def constructor(materialSelector as MaterialSelector):
 		self.materialSelector = materialSelector
