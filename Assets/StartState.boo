@@ -47,6 +47,14 @@ class StartState (IGameState):
 			HandleNonMenuStateGUI()
 
 	private def HandleMenuStateGUI():
+		# Game Name
+		gameNameStyle = GUIStyle(GUI.skin.GetStyle("Label"))
+		gameNameStyle.alignment = TextAnchor.UpperCenter
+		gameNameStyle.fontSize = System.Math.Max(50 * GUIScaler.Scale, 14)				
+		gameNameWidth = Math.Min(340 * GUIScaler.Scale, Screen.width)
+			
+		GUI.Label(Rect(Screen.width/2 - (gameNameWidth/2), (50 * GUIScaler.Scale), gameNameWidth, 60 * GUIScaler.Scale), "Two-Way Box", gameNameStyle)
+		
 		# Menu Buttons	
 		if gameStartCount > 0 and game.Victory == GameVictory.None:
 			if MenuButton("Continue game", "Continue playing a running game.. enjoy your break.", -197):
@@ -87,8 +95,12 @@ class StartState (IGameState):
 		if game.Victory != GameVictory.None:
 			scoresView.DrawGUI()
 
-	private def MenuButton(buttonText as string, buttonTooltip as string, offsetY as int):
+	private def GetCenterArea(offsetY as int):
 		area = Rect((Screen.width/2) - (75 * GUIScaler.Scale), Screen.height/2 + ((offsetY+60) * GUIScaler.Scale), 150 * GUIScaler.Scale, 30 * GUIScaler.Scale)
+		return area
+
+	private def MenuButton(buttonText as string, buttonTooltip as string, offsetY as int):
+		area = GetCenterArea(offsetY)
 		return GUI.Button(area, GUIContent(buttonText, buttonTooltip))
 
 	private def HandleNonMenuStateGUI():
