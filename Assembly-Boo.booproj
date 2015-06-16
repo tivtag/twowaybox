@@ -105,8 +105,6 @@
      <Compile Include="Assets\View\TetrisVictoryView.boo" />
      <Compile Include="Assets\View\TetrisView.boo" />
      <Compile Include="Assets\View\ViewConstants.boo" />
-     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
-     <None Include="Assets\Plugins\Android\src\Build.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
