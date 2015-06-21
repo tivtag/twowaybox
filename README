@@ -1,6 +1,9 @@
 Inverse-Space Three-D Two-Player Tetris
 ---------------------------------------
-Istdt is a Tetris game, made in Unity3D/Boo.
+Istdt is a box-style game, made in Unity3D/Boo.
 The game focuses on 2-player gameplay in the same game field.
 
 It was mainly meant as a learning experience, but also to implement some features that were request by players of an older 2D-Version of the game.
+By now it has grown to be on the Google PlayStore. The source code is still viewable by the public such that someone might learn something from it.
+
+Google PlayStore: https://play.google.com/store/apps/details?id=com.federrot.twowaybox
