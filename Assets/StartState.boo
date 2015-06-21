@@ -50,10 +50,10 @@ class StartState (IGameState):
 		# Game Name
 		gameNameStyle = GUIStyle(GUI.skin.GetStyle("Label"))
 		gameNameStyle.alignment = TextAnchor.UpperCenter
-		gameNameStyle.fontSize = System.Math.Max(50 * GUIScaler.Scale, 14)				
+		gameNameStyle.fontSize = System.Math.Max(21 * GUIScaler.Scale, 13)				
 		gameNameWidth = Math.Min(340 * GUIScaler.Scale, Screen.width)
 			
-		GUI.Label(Rect(Screen.width/2 - (gameNameWidth/2), (50 * GUIScaler.Scale), gameNameWidth, 60 * GUIScaler.Scale), "Two-Way Box", gameNameStyle)
+		GUI.Label(Rect(Screen.width/2 - (gameNameWidth/2), (45 * GUIScaler.Scale), gameNameWidth, 60 * GUIScaler.Scale), "Two-Way Box", gameNameStyle)
 		
 		# Menu Buttons	
 		if gameStartCount > 0 and game.Victory == GameVictory.None:
