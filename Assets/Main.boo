@@ -12,16 +12,17 @@ class Main (MonoBehaviour):
 
 	def Start():
 		SimulationConstants.Configure()
+		socialIntegration = SocialIntegration()
 		
 		game = Game()
 		gameView = GameView(game, MainCamera, MaterialSelector(BlackCubePrefab, WhiteCubePrefab, FillerCubePrefab))
 		
 		# Game Modes
-		gameModes.Register(FourMatchGameMode(game))
-		gameModes.Register(SinglePlayerGameMode(game))
+		gameModes.Register(FourMatchGameMode(game, socialIntegration))
+		gameModes.Register(SinglePlayerGameMode(game, socialIntegration))
 		
 		# States
-		states.Register(StartState(game, gameView, MainLight, states, gameModes))
+		states.Register(StartState(game, gameView, MainLight, states, gameModes, socialIntegration))
 		states.Register(GameState(game, gameView, states, gameModes))
 		
 		states.ChangeTo[of StartState]() 

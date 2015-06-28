@@ -7,8 +7,9 @@ class SinglePlayerGameMode (IGameMode):
 		get: return playerColor
 		set: playerColor = value
 
-	def constructor(game as Game):
+	def constructor(game as Game, socialIntegration as SocialIntegration):
 		self.game = game
+		self.socialIntegration = socialIntegration
 
 	def Update():
 		pass
@@ -43,10 +44,12 @@ class SinglePlayerGameMode (IGameMode):
 		totalClearCount = game.ClearCountWhite + game.ClearCountBlack
 		if totalClearCount > 0:
 			game.Victory = GameVictory.Neither
+			socialIntegration.ReportScoreSinglePlayer(player.Score.Value)
 
 	private def OnPlayerScoreChanged(sender as object, e as EventArgs):
 		player.Movement.IncreaseVerticalMovementSpeedByFactor(0.0025)
 
 	private playerColor as GameColor
 	private player as Player
+	private final socialIntegration as SocialIntegration
 	private final game as Game

@@ -2,8 +2,9 @@
 # Play four matches one after the other,
 # the player to clear most sides wins the game
 class FourMatchGameMode (IGameMode):
-	def constructor(game as Game):
+	def constructor(game as Game, socialIntegration as SocialIntegration):
 		self.game = game
+		self.socialIntegration = socialIntegration
 
 	def Update():
 		if changeSideAfterClearInSeconds > 0.0:
@@ -35,14 +36,20 @@ class FourMatchGameMode (IGameMode):
 	private def OnClearCountChanged(sender as object, e as EventArgs):
 		totalClearCount = game.ClearCountWhite + game.ClearCountBlack
 		if totalClearCount == 4:
-			if game.ClearCountWhite > game.ClearCountBlack:
-				game.Victory = GameVictory.White
-			elif game.ClearCountWhite < game.ClearCountBlack:
-				game.Victory = GameVictory.Black
-			else: 
-				game.Victory = GameVictory.Both
+			OnGameComplete()
 		elif totalClearCount > 0:
 			changeSideAfterClearInSeconds = 3.0
 
+	private def OnGameComplete():
+		if game.ClearCountWhite > game.ClearCountBlack:
+			game.Victory = GameVictory.White
+		elif game.ClearCountWhite < game.ClearCountBlack:
+			game.Victory = GameVictory.Black
+		else:
+			game.Victory = GameVictory.Both
+		
+		socialIntegration.ReportScoreTwoPlayer(game.TotalScore)
+
 	private changeSideAfterClearInSeconds as single
 	private final game as Game
+	private final socialIntegration as SocialIntegration

@@ -2,12 +2,13 @@
 # The start state is active when the game boots up and between matches.
 # It allows the player to select a game mode to play or to exit the game.
 class StartState (IGameState):
-	def constructor(game as Game, gameView as GameView, mainLight as Light, states as GameStateManager, gameModes as GameStateManager):
+	def constructor(game as Game, gameView as GameView, mainLight as Light, states as GameStateManager, gameModes as GameStateManager, socialIntegration as SocialIntegration):
 		self.game = game
 		self.gameView = gameView
 		self.light = mainLight
 		self.states = states
 		self.gameModes = gameModes
+		self.socialIntegration = socialIntegration
 		self.scoresView = ScoresView(game)
 		
 		scale = GUIScaler.Scale
@@ -25,7 +26,7 @@ class StartState (IGameState):
 			vectors = [Vector3.down, Vector3.up, Vector3.forward, Vector3.back, Vector3.left, Vector3.right]
 			oppositeUpVector = -upVector
 			
-			while true: 
+			while true:
 				upVector = vectors[UnityEngine.Random.Range(0, vectors.Count-1)]
 				break unless upVector == oppositeUpVector
 			
@@ -57,19 +58,25 @@ class StartState (IGameState):
 		
 		# Menu Buttons	
 		if gameStartCount > 0 and game.Victory == GameVictory.None:
-			if MenuButton("Continue game", "Continue playing a running game.. enjoy your break.", -197):
+			if MenuButton("Continue game", "Continue playing a running game.. enjoy your break.", 0, -197):
 				ContinueGame()
 		
-		if MenuButton("Start 1P black", "Play black alone - how long can you keep up?", -140):
+		if MenuButton("Start 1P black", "Play black alone - how long can you keep up?", 0, -140):
 			StartGame[of SinglePlayerGameMode]({mode|mode.PlayerColor = GameColor.Black})
 		
-		if MenuButton("Start 1P white", "Play white alone - how long can you keep up?", -107):
+		if MenuButton("Start 1P white", "Play white alone - how long can you keep up?", 0, -107):
 			StartGame[of SinglePlayerGameMode]({mode|mode.PlayerColor = GameColor.White})
 		
-		if MenuButton("Start 2P game", "Two Players - most clears after 4 matches wins!", -50):
+		if MenuButton("Start 2P game", "Two Players - most clears after 4 matches wins!", 0, -50):
 			StartGame[of FourMatchGameMode](null)
+			
+		if MenuButton("Leaderboards", "Show Google Play Games Leaderboards", 0, 7):
+			ShowLeaderboardUI()
+			
+#		if MenuButton("Achievements", "Show Google Play Games Achievements", 100, 7):
+#			ShowAchievementsUI()
 		
-		if MenuButton("Exit", "Sayounara.", 7):
+		if MenuButton("Exit", "Sayounara.", 0, 57):
 			ExitGame()
 		
 		# Tooltip
@@ -95,12 +102,12 @@ class StartState (IGameState):
 		if game.Victory != GameVictory.None:
 			scoresView.DrawGUI()
 
-	private def GetCenterArea(offsetY as int):
-		area = Rect((Screen.width/2) - (75 * GUIScaler.Scale), Screen.height/2 + ((offsetY+60) * GUIScaler.Scale), 150 * GUIScaler.Scale, 30 * GUIScaler.Scale)
+	private def GetCenterArea(offsetX as int, offsetY as int):
+		area = Rect((Screen.width/2) - (75 * GUIScaler.Scale) + (offsetX * GUIScaler.Scale), Screen.height/2 + ((offsetY+60) * GUIScaler.Scale), 150 * GUIScaler.Scale, 30 * GUIScaler.Scale)
 		return area
 
-	private def MenuButton(buttonText as string, buttonTooltip as string, offsetY as int):
-		area = GetCenterArea(offsetY)
+	private def MenuButton(buttonText as string, buttonTooltip as string, offsetX as int, offsetY as int):
+		area = GetCenterArea(offsetX, offsetY)
 		return GUI.Button(area, GUIContent(buttonText, buttonTooltip))
 
 	private def HandleNonMenuStateGUI():
@@ -148,6 +155,12 @@ class StartState (IGameState):
 		gameModes.Set(mode)
 		
 		gameStartCount += 1
+		
+	private def ShowLeaderboardUI():
+		socialIntegration.ShowLeaderboardUI()
+		
+	private def ShowAchievementsUI():
+		socialIntegration.ShowAchievementsUI()
 
 	private angle as single = 90.0
 	private upVector as Vector3 = Vector3.down
@@ -161,5 +174,6 @@ class StartState (IGameState):
 	private final scoresView as ScoresView
 	private final light as Light
 
+	private final socialIntegration as SocialIntegration
 	private final states as GameStateManager
 	private final gameModes as GameStateManager

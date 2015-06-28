@@ -54,6 +54,9 @@ class Game:
 				victory = value
 				VictoryChanged(self, EventArgs.Empty)
 
+	TotalScore as int:
+		get: return playerBlack.Score.Value + playerWhite.Score.Value
+
 	def constructor():
 		CreateTetrises()
 		activeTetris = GetTetris(GameSide.Front)
