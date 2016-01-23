@@ -51,10 +51,16 @@ class StartState (IGameState):
 		# Game Name
 		gameNameStyle = GUIStyle(GUI.skin.GetStyle("Label"))
 		gameNameStyle.alignment = TextAnchor.UpperCenter
-		gameNameStyle.fontSize = System.Math.Max(21 * GUIScaler.Scale, 13)				
+		gameNameStyle.fontSize = System.Math.Max(21 * GUIScaler.Scale, 13)
 		gameNameWidth = Math.Min(340 * GUIScaler.Scale, Screen.width)
-			
-		GUI.Label(Rect(Screen.width/2 - (gameNameWidth/2), (45 * GUIScaler.Scale), gameNameWidth, 60 * GUIScaler.Scale), "Two-Way Box", gameNameStyle)
+
+		gameName as string
+		if GameConstants.IsFreeEdition:
+			gameName = "Free Two-Way Box"
+		else:
+			gameName = "Two-Way Box"
+		
+		GUI.Label(Rect(Screen.width/2 - (gameNameWidth/2), (45 * GUIScaler.Scale), gameNameWidth, 60 * GUIScaler.Scale), gameName, gameNameStyle)
 		
 		# Menu Buttons	
 		if gameStartCount > 0 and game.Victory == GameVictory.None:
@@ -69,15 +75,19 @@ class StartState (IGameState):
 		
 		if MenuButton("Start 2P game", "Two Players - most clears after 4 matches wins!", 0, -50):
 			StartGame[of FourMatchGameMode](null)
-			
+		
 		if MenuButton("Leaderboards", "Show Google Play Games Leaderboards", 0, 7):
 			ShowLeaderboardUI()
-			
-#		if MenuButton("Achievements", "Show Google Play Games Achievements", 100, 7):
-#			ShowAchievementsUI()
 		
-		if MenuButton("Exit", "Sayounara.", 0, 57):
-			ExitGame()
+		if MenuButton("Achievements", "Show Google Play Games Achievements", 0, 40):
+			ShowAchievementsUI()
+		
+		if GameConstants.IsFreeEdition:
+			if MenuButton("Play Ad :)", "Play an ad to support the developer :)", 0, 73):
+				ShowAchievementsUI()
+		
+		#if MenuButton("Exit", "Sayounara.", 0, 57):
+		# 	ExitGame()
 		
 		# Tooltip
 		if GUI.tooltip.Length > 0:
@@ -143,22 +153,22 @@ class StartState (IGameState):
 
 	private def StartGame[of TGameMode(IGameMode)](initializer as System.Action[of TGameMode]):
 		# Change Game State
-		gameState = states.ChangeTo[of GameState]()		
+		gameState = states.ChangeTo[of GameState]()	
 		gameState.Reset()
 		
 		# Change Game Mode
 		mode = gameModes.Get[of TGameMode]()
 		if not initializer is null:
 			initializer(mode)
-			
+		
 		gameModes.Set(null)
 		gameModes.Set(mode)
 		
 		gameStartCount += 1
-		
+
 	private def ShowLeaderboardUI():
 		socialIntegration.ShowLeaderboardUI()
-		
+
 	private def ShowAchievementsUI():
 		socialIntegration.ShowAchievementsUI()
 

@@ -54,14 +54,14 @@ internal class AndroidAppStateClient : AppStateClient {
     }
 
     public void LoadState(int slot, OnStateLoadedListener listener) {
-        Logger.d("LoadState, slot=" + slot);
+        GooglePlayGames.OurUtils.Logger.d("LoadState, slot=" + slot);
         using (var apiClient = GetApiClient(mServices)) {
             CallAppState(apiClient, "load", new OnStateResultProxy(mServices, listener), slot);
         }
     }
 
     public void UpdateState(int slot, byte[] data, OnStateLoadedListener listener) {
-        Logger.d("UpdateState, slot=" + slot);
+        GooglePlayGames.OurUtils.Logger.d("UpdateState, slot=" + slot);
         using (var apiClient = GetApiClient(mServices)) {
             AppStateManager.CallStatic("update", apiClient, slot, data);
         }
@@ -123,27 +123,27 @@ internal class AndroidAppStateClient : AppStateClient {
 
         private void OnStateConflict(int stateKey, string resolvedVersion,
             byte[] localData, byte[] serverData) {
-            Logger.d("OnStateResultProxy.onStateConflict called, stateKey=" + stateKey +
+            GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy.onStateConflict called, stateKey=" + stateKey +
                 ", resolvedVersion=" + resolvedVersion);
 
             debugLogData("localData", localData);
             debugLogData("serverData", serverData);
 
             if (mListener != null) {
-                Logger.d("OnStateResultProxy.onStateConflict invoking conflict callback.");
+                GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy.onStateConflict invoking conflict callback.");
                 PlayGamesHelperObject.RunOnGameThread(() => {
                     byte[] resolvedData =
                         mListener.OnStateConflict(stateKey, localData, serverData);
                     ResolveState(stateKey, resolvedVersion, resolvedData, mListener);
                 });
             } else {
-                Logger.w("No conflict callback specified! Cannot resolve cloud save conflict.");
+                GooglePlayGames.OurUtils.Logger.w("No conflict callback specified! Cannot resolve cloud save conflict.");
             }
         }
 
         private void ResolveState(int slot, string resolvedVersion, byte[] resolvedData,
             OnStateLoadedListener listener) {
-            Logger.d(string.Format("AndroidClient.ResolveState, slot={0}, ver={1}, " +
+            GooglePlayGames.OurUtils.Logger.d(string.Format("AndroidClient.ResolveState, slot={0}, ver={1}, " +
                 "data={2}", slot, resolvedVersion, resolvedData));
             using (var apiClient = GetApiClient(mServices)) {
                 CallAppState(apiClient, "resolve", new OnStateResultProxy(mServices, listener),
@@ -152,7 +152,7 @@ internal class AndroidAppStateClient : AppStateClient {
         }
 
         private void OnStateLoaded(int statusCode, int stateKey, byte[] localData) {
-            Logger.d("OnStateResultProxy.onStateLoaded called, status " + statusCode +
+            GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy.onStateLoaded called, status " + statusCode +
                 ", stateKey=" + stateKey);
             debugLogData("localData", localData);
 
@@ -160,79 +160,79 @@ internal class AndroidAppStateClient : AppStateClient {
 
             switch (statusCode) {
                 case STATUS_OK:
-                    Logger.d("Status is OK, so success.");
+                    GooglePlayGames.OurUtils.Logger.d("Status is OK, so success.");
                     success = true;
                     break;
                 case STATUS_NO_DATA:
-                    Logger.d("Status is NO DATA (no network?), so it's a failure.");
+                    GooglePlayGames.OurUtils.Logger.d("Status is NO DATA (no network?), so it's a failure.");
                     success = false;
                     localData = null;
                     break;
                 case STATUS_STALE_DATA:
-                    Logger.d("Status is STALE DATA, so considering as success.");
+                    GooglePlayGames.OurUtils.Logger.d("Status is STALE DATA, so considering as success.");
                     success = true;
                     break;
                 case STATUS_KEY_NOT_FOUND:
-                    Logger.d("Status is KEY NOT FOUND, which is a success, but with no data.");
+                    GooglePlayGames.OurUtils.Logger.d("Status is KEY NOT FOUND, which is a success, but with no data.");
                     success = true;
                     localData = null;
                     break;
                 default:
-                    Logger.e("Cloud load failed with status code " + statusCode);
+                    GooglePlayGames.OurUtils.Logger.e("Cloud load failed with status code " + statusCode);
                     success = false;
                     localData = null;
                     break;
             }
 
             if (mListener != null) {
-                Logger.d("OnStateResultProxy.onStateLoaded invoking load callback.");
+                GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy.onStateLoaded invoking load callback.");
                 PlayGamesHelperObject.RunOnGameThread(() => {
                     mListener.OnStateLoaded(success, stateKey, localData);
                 });
             } else {
-                Logger.w("No load callback specified!");
+                GooglePlayGames.OurUtils.Logger.w("No load callback specified!");
             }
         }
 
         private void debugLogData(string tag, byte[] data) {
-            Logger.d("   " + tag + ": " + Logger.describe(data));
+            GooglePlayGames.OurUtils.Logger.d("   " + tag + ": " + GooglePlayGames.OurUtils.Logger.describe(data));
         }
 
         public void onResult(AndroidJavaObject result) {
-            Logger.d("OnStateResultProxy.onResult, result=" + result);
+            GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy.onResult, result=" + result);
 
             int statusCode = GetStatusCode(result);
-            Logger.d("OnStateResultProxy: status code is " + statusCode);
+            GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy: status code is " + statusCode);
 
             if (result == null) {
-                Logger.e("OnStateResultProxy: result is null.");
+                GooglePlayGames.OurUtils.Logger.e("OnStateResultProxy: result is null.");
                 return;
             }
 
-            Logger.d("OnstateResultProxy: retrieving result objects...");
+            GooglePlayGames.OurUtils.Logger.d("OnstateResultProxy: retrieving result objects...");
             AndroidJavaObject loadedResult = result.NullSafeCall("getLoadedResult");
             AndroidJavaObject conflictResult = result.NullSafeCall("getConflictResult");
 
-            Logger.d("Got result objects.");
-            Logger.d("loadedResult = " + loadedResult);
-            Logger.d("conflictResult = " + conflictResult);
+            GooglePlayGames.OurUtils.Logger.d("Got result objects.");
+            GooglePlayGames.OurUtils.Logger.d("loadedResult = " + loadedResult);
+            GooglePlayGames.OurUtils.Logger.d("conflictResult = " + conflictResult);
 
             if (conflictResult != null) {
-                Logger.d("OnStateResultProxy: processing conflict.");
+                GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy: processing conflict.");
                 int stateKey = conflictResult.Call<int>("getStateKey");
                 string ver = conflictResult.Call<string>("getResolvedVersion");
                 byte[] localData = ToByteArray(conflictResult.NullSafeCall("getLocalData"));
                 byte[] serverData = ToByteArray(conflictResult.NullSafeCall("getServerData"));
-                Logger.d("OnStateResultProxy: conflict args parsed, calling.");
+                GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy: conflict args parsed, calling.");
                 OnStateConflict(stateKey, ver, localData, serverData);
             } else if (loadedResult != null) {
-                Logger.d("OnStateResultProxy: processing normal load.");
+                GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy: processing normal load.");
                 int stateKey = loadedResult.Call<int>("getStateKey");
                 byte[] localData = ToByteArray(loadedResult.NullSafeCall("getLocalData"));
-                Logger.d("OnStateResultProxy: loaded args parsed, calling.");
+                GooglePlayGames.OurUtils.Logger.d("OnStateResultProxy: loaded args parsed, calling.");
                 OnStateLoaded(statusCode, stateKey, localData);
             } else {
-                Logger.e("OnStateResultProxy: both loadedResult and conflictResult are null!");
+               GooglePlayGames.OurUtils.Logger.e("OnStateResultProxy: both loadedResult and conflictResult are null!");
             }
         }
     }
