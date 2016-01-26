@@ -16,9 +16,9 @@
     
 	<!-- the space in these forces it to be interpreted as a string vs. int -->
         <meta-data android:name="com.google.android.gms.games.APP_ID"
-        		android:value="\ 409569718870" /> 
+        		android:value="\ 4530154367" /> 
         <meta-data android:name="com.google.android.gms.appstate.APP_ID"
-        		android:value="\ 409569718870" /> 
+        		android:value="\ 4530154367" /> 
         <meta-data android:name="com.google.android.gms.version" 
         		android:value="@integer/google_play_services_version" /> 
         <activity android:name="com.google.games.bridge.NativeBridgeActivity"

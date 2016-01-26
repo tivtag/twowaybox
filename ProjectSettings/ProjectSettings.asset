@@ -90,14 +90,14 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: com.federrot.twowayboxfree
-  bundleVersion: 1.5.1
+  bundleVersion: 1.5.4
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
   productGUID: 5fe32a454ad9c4947a52c29db6450805
-  AndroidBundleVersionCode: 9
+  AndroidBundleVersionCode: 12
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 0
   aotOptions: 

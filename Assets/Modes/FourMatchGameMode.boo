@@ -48,7 +48,11 @@ class FourMatchGameMode (IGameMode):
 		else:
 			game.Victory = GameVictory.Both
 		
+		ReportScore()
+
+	def ReportScore():
 		socialIntegration.ReportScoreTwoPlayer(game.TotalScore)
+		socialIntegration.ReportAchievementPlayedTwoPlayerMatch(game.ClearCountBlack, game.ClearCountWhite, game.PlayerBlack.Score.Value, game.PlayerWhite.Score.Value)
 
 	private changeSideAfterClearInSeconds as single
 	private final game as Game

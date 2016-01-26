@@ -44,7 +44,11 @@ class SinglePlayerGameMode (IGameMode):
 		totalClearCount = game.ClearCountWhite + game.ClearCountBlack
 		if totalClearCount > 0:
 			game.Victory = GameVictory.Neither
-			socialIntegration.ReportScoreSinglePlayer(player.Score.Value)
+			ReportScore()
+
+	def ReportScore():
+		socialIntegration.ReportScoreSinglePlayer(player.Score.Value)
+		socialIntegration.ReportAchievementPlayedSinglePlayerMatch(game.ClearCountBlack, game.ClearCountWhite, player.Score.Value)
 
 	private def OnPlayerScoreChanged(sender as object, e as EventArgs):
 		player.Movement.IncreaseVerticalMovementSpeedByFactor(0.0025)

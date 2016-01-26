@@ -37,7 +37,7 @@ class GameState (IGameState):
 		e = Event.current
 		if e.type == EventType.KeyDown and e.keyCode == KeyCode.Escape:
 			ChangeToStartState()
-	
+
 	# Allow the player to pause the game by touching the center of the screen
 	private def HandleTouchInput():		
 		if Input.touchCount > 0:
@@ -55,7 +55,7 @@ class GameState (IGameState):
 					allowTouchSwitchToMainScreen = false
 		else:		
 			allowTouchSwitchToMainScreen = false
-	
+
 	private def OnGameVictoryChanged():
 		if game.Victory != GameVictory.None:
 			ChangeToStartState()

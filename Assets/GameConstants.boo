@@ -6,3 +6,5 @@ class GameConstants:
 	# 
 	# Free: com.federrot.twowayboxfree
 	public static IsFreeEdition as bool = true
+
+	public static IsDevelopment as bool = false

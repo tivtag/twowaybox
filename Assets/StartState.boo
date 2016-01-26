@@ -2,13 +2,14 @@
 # The start state is active when the game boots up and between matches.
 # It allows the player to select a game mode to play or to exit the game.
 class StartState (IGameState):
-	def constructor(game as Game, gameView as GameView, mainLight as Light, states as GameStateManager, gameModes as GameStateManager, socialIntegration as SocialIntegration):
+	def constructor(game as Game, gameView as GameView, mainLight as Light, states as GameStateManager, gameModes as GameStateManager, socialIntegration as SocialIntegration, adIntegration as AdIntegration):
 		self.game = game
 		self.gameView = gameView
 		self.light = mainLight
 		self.states = states
 		self.gameModes = gameModes
 		self.socialIntegration = socialIntegration
+		self.adIntegration = adIntegration
 		self.scoresView = ScoresView(game)
 		
 		scale = GUIScaler.Scale
@@ -78,22 +79,25 @@ class StartState (IGameState):
 		
 		if MenuButton("Leaderboards", "Show Google Play Games Leaderboards", 0, 7):
 			ShowLeaderboardUI()
+			RandomizeLightColorInProVersion()
 		
 		if MenuButton("Achievements", "Show Google Play Games Achievements", 0, 40):
 			ShowAchievementsUI()
-		
+			RandomizeLightColorInProVersion()
+
 		if GameConstants.IsFreeEdition:
-			if MenuButton("Play Ad :)", "Play an ad to support the developer :)", 0, 73):
-				ShowAchievementsUI()
-		
-		#if MenuButton("Exit", "Sayounara.", 0, 57):
-		# 	ExitGame()
+			if MenuButton("Play Ad :)", "Play an ad to support Paul :)", 0, 76):
+				adIntegration.ShowAd()
+				RandomizeLightColor()
+		else:
+			if MenuButton("Exit", "Sayounara.", 0, 76):
+				ExitGame()
 		
 		# Tooltip
 		if GUI.tooltip.Length > 0:
 			tooltipStyle = GUIStyle(GUI.skin.GetStyle("Label"))
 			tooltipStyle.alignment = TextAnchor.UpperCenter
-			tooltipStyle.fontSize = System.Math.Max(10 * GUIScaler.Scale, 14)			
+			tooltipStyle.fontSize = System.Math.Max(10 * GUIScaler.Scale, 14)
 			tooltipWidth = Math.Min(240 * GUIScaler.Scale, Screen.width)
 			
 			tooltipArea = Rect(Screen.width/2 - (tooltipWidth/2), Screen.height/2 + (120 * GUIScaler.Scale), tooltipWidth, 50 * GUIScaler.Scale)
@@ -111,6 +115,10 @@ class StartState (IGameState):
 		# Draw score after a game
 		if game.Victory != GameVictory.None:
 			scoresView.DrawGUI()
+
+	private def RandomizeLightColorInProVersion():
+		if not GameConstants.IsFreeEdition:
+			RandomizeLightColor()
 
 	private def GetCenterArea(offsetX as int, offsetY as int):
 		area = Rect((Screen.width/2) - (75 * GUIScaler.Scale) + (offsetX * GUIScaler.Scale), Screen.height/2 + ((offsetY+60) * GUIScaler.Scale), 150 * GUIScaler.Scale, 30 * GUIScaler.Scale)
@@ -134,11 +142,14 @@ class StartState (IGameState):
 
 	def OnEnter():
 		if initialEnter:
-			light.color = Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value)
+			RandomizeLightColor()
 			light.intensity = 22.0
 			initialEnter = false
 		else:
 			light.intensity = 3.5
+
+	private def RandomizeLightColor():
+		light.color = Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value)
 
 	def OnLeave():
 		light.color = Color.white
@@ -185,5 +196,6 @@ class StartState (IGameState):
 	private final light as Light
 
 	private final socialIntegration as SocialIntegration
+	private final adIntegration as AdIntegration
 	private final states as GameStateManager
 	private final gameModes as GameStateManager
